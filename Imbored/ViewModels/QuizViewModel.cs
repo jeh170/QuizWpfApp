@@ -50,6 +50,7 @@ namespace Imbored.ViewModels
         {
             var deSerializer = new XmlSerializer(typeof(Question));
             var dialog = new OpenFileDialog();
+            dialog.Filter = "Question files (*.qst) |*.qst";
             var showDialog = dialog.ShowDialog() ?? false;
             if (showDialog)
             {
