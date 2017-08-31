@@ -90,6 +90,7 @@
     <Compile Include="ViewModels\NewQuestionView.xaml.cs">
       <DependentUpon>NewQuestionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\NewQuestionViewModel.cs" />
     <Compile Include="ViewModels\QuizViewModel.cs" />
     <Compile Include="Views\QuizView.xaml.cs">
       <DependentUpon>QuizView.xaml</DependentUpon>
