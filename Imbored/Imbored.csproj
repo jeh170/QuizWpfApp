@@ -87,7 +87,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\NewQuestionView.xaml.cs">
+    <Compile Include="Converters\EnumMatchToBooleanConverter.cs" />
+    <Compile Include="Views\NewQuestionView.xaml.cs">
       <DependentUpon>NewQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\NewQuestionViewModel.cs" />
@@ -108,7 +109,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ViewModels\NewQuestionView.xaml">
+    <Page Include="Views\NewQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
