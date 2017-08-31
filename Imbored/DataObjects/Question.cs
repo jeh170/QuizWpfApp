@@ -13,8 +13,22 @@ namespace Imbored.DataObjects
     public class Question : BindableBase
     {
         private string _query;
-        private List<string> _answers;
+        private IEnumerable<string> _answers;
         private int _correctAnswer;
+
+        public Question()
+        {
+            
+        }
+
+        public Question(string query, IEnumerable<string> answers, int correctAnswer)
+        {
+            _query = query;
+            _answers = answers;
+            _correctAnswer = correctAnswer;
+        }
+
+        
 
         [XmlElement("Query")]
         public string Query
@@ -24,7 +38,7 @@ namespace Imbored.DataObjects
         }
         
         [XmlElement("Answer")]
-        public List<string> Answers
+        public IEnumerable<string> Answers
         {
             get { return _answers; }
             set { SetProperty(ref _answers, value); }

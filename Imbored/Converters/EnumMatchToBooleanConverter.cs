@@ -26,14 +26,14 @@ namespace Imbored.Converters
             object parameter, CultureInfo culture)
         {
             if (value == null || parameter == null)
-                return null;
+                return 0;
 
             bool useValue = (bool)value;
             string targetValue = parameter.ToString();
             if (useValue)
-                return Enum.Parse(targetType, targetValue);
+                return int.Parse(targetValue);
 
-            return null;
+            return 0;
         }
     }
 }

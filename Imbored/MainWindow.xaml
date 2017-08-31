@@ -8,9 +8,16 @@
     xmlns:v="clr-namespace:Imbored.Views"
     Title="MainWindow"
     Width="525"
-    Height="350"
+    Height="400"
     mc:Ignorable="d">
     <Grid>
-        <v:QuizView />
+        <TabControl>
+            <TabItem Header="Quiz">
+                <v:QuizView />
+            </TabItem>
+            <TabItem Header="Create">
+                <v:NewQuestionView />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

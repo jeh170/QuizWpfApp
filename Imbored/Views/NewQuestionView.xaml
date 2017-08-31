@@ -1,13 +1,17 @@
-﻿<UserControl
-    x:Class="Imbored.Views.NewQuestionView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Imbored.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="Imbored.Views.NewQuestionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Imbored.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Imbored.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <c:EnumMatchToBooleanConverter x:Key="EnumMatchToBooleanConverter" />
+        <c:BooleanToCorrectStringConverter x:Key="BooleanToCorrectStringConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -15,17 +19,60 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox Padding="10" Header="Question">
+        <GroupBox Padding="10"
+                  Header="Question">
             <TextBox Text="{Binding Query}" />
         </GroupBox>
-        <GroupBox
-            Grid.Row="1"
-            Padding="10"
-            Header="Answers">
+        <GroupBox Grid.Row="1"
+                  Padding="10"
+                  Header="Answers">
             <StackPanel>
-                <TextBlock Text="A: " />
-                <TextBox Text="{Binding}" />
+                <StackPanel Margin="5"
+                            Orientation="Horizontal">
+                    <TextBlock Text="A: " />
+                    <TextBox Width="150"
+                             Margin="5,0"
+                             Text="{Binding Answers[0]}" />
+                    <RadioButton Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
+                                 FlowDirection="LeftToRight"
+                                 IsChecked="{Binding CorrectAnswer, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=0}" />
+                </StackPanel>
+                <StackPanel Margin="5"
+                            Orientation="Horizontal">
+                    <TextBlock Text="B: " />
+                    <TextBox Width="150"
+                             Margin="5,0"
+                             Text="{Binding Answers[1]}" />
+                    <RadioButton Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
+                                 FlowDirection="LeftToRight"
+                                 IsChecked="{Binding CorrectAnswer, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=1}" />
+                </StackPanel>
+                <StackPanel Margin="5"
+                            Orientation="Horizontal">
+                    <TextBlock Text="C: " />
+                    <TextBox Width="150"
+                             Margin="5,0"
+                             Text="{Binding Answers[2]}" />
+                    <RadioButton Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
+                                 FlowDirection="LeftToRight"
+                                 IsChecked="{Binding CorrectAnswer, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=2}" />
+                </StackPanel>
+                <StackPanel Margin="5"
+                            Orientation="Horizontal">
+                    <TextBlock Text="D: " />
+                    <TextBox Width="150"
+                             Margin="5,0"
+                             Text="{Binding Answers[3]}" />
+                    <RadioButton Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
+                                 FlowDirection="LeftToRight"
+                                 IsChecked="{Binding CorrectAnswer, Mode=TwoWay, Converter={StaticResource EnumMatchToBooleanConverter}, ConverterParameter=3}" />
+                </StackPanel>
             </StackPanel>
         </GroupBox>
+        <Button Grid.Row="2"
+                Width="100"
+                Height="20"
+                Command="{Binding SaveQuestionCommand}"
+                Content="Save Question" />
     </Grid>
 </UserControl>
