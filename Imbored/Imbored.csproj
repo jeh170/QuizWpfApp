@@ -89,6 +89,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BooleanToCorrectStringConverter.cs" />
     <Compile Include="Converters\EnumMatchToBooleanConverter.cs" />
+    <Compile Include="DataObjects\QuestionSet.cs" />
     <Compile Include="Views\NewQuestionView.xaml.cs">
       <DependentUpon>NewQuestionView.xaml</DependentUpon>
     </Compile>

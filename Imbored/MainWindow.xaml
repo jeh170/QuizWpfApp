@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Imbored.Views"
     Title="MainWindow"
-    Width="525"
+    Width="750"
     Height="400"
     mc:Ignorable="d">
     <Grid>

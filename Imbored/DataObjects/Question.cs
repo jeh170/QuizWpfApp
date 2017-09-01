@@ -12,6 +12,7 @@ namespace Imbored.DataObjects
 {
     public class Question : BindableBase
     {
+        private string _catagory;
         private string _query;
         private List<string> _answers;
         private int _correctAnswer;
@@ -21,14 +22,22 @@ namespace Imbored.DataObjects
             
         }
 
-        public Question(string query, List<string> answers, int correctAnswer)
+        public Question(string catagory, string query, List<string> answers, int correctAnswer)
         {
+            _catagory = catagory;
             _query = query;
             _answers = answers;
             _correctAnswer = correctAnswer;
         }
 
         
+
+        [XmlElement("QuestionName")]
+        public string Catagory
+        {
+            get { return _catagory; }
+            set { SetProperty(ref _catagory, value); }
+        }
 
         [XmlElement("Query")]
         public string Query
@@ -49,6 +58,11 @@ namespace Imbored.DataObjects
         {
             get { return _correctAnswer; }
             set { SetProperty(ref _correctAnswer, value); }
+        }
+
+        public override string ToString()
+        {
+            return _catagory;
         }
     }
 }

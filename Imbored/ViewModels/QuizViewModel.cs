@@ -1,6 +1,7 @@
 ﻿using Imbored.DataObjects;
 using Prism.Mvvm;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Imbored.ViewModels
     public class QuizViewModel : BindableBase
     {
         private Question _currentQuestion;
+        private IEnumerable<Question> _questionList;
+        private IEnumerator _questionEnumerator;
 
         public Question CurrentQuestion
         {
@@ -27,7 +30,6 @@ namespace Imbored.ViewModels
             }
         }
 
-        private IEnumerable<Question> _questionList;
 
         public IEnumerable<Question> QuestionList
         {
@@ -38,30 +40,44 @@ namespace Imbored.ViewModels
         public QuizViewModel()
         {
             OpenFileCommand = new DelegateCommand(OpenFile);
-            SelectAnswerCommand = new DelegateCommand<int?>(SelectAnswer);
+            SelectAnswerCommand = new DelegateCommand<int?>(SelectAnswer);//, CanSelectAnswer);
+        }
+
+        private bool CanSelectAnswer(int? arg)
+        {
+            return CurrentQuestion != null;
         }
 
         private void SelectAnswer(int? answer)
         {
-            MessageBox.Show(answer == CurrentQuestion.CorrectAnswer ? "Correct" : "Incorrect");
+            var b = answer == CurrentQuestion.CorrectAnswer;
+            MessageBox.Show(b ? "Correct" : "Incorrect");
+
+            if (b)
+            {
+                _questionEnumerator.MoveNext();
+                CurrentQuestion = (Question)_questionEnumerator.Current;
+            }
         }
 
         private void OpenFile()
         {
-            var deSerializer = new XmlSerializer(typeof(Question));
+            var deSerializer = new XmlSerializer(typeof(QuestionSet));
             var dialog = new OpenFileDialog();
-            dialog.Filter = "Question files (*.qst) |*.qst";
+            dialog.Filter = "Question Set files (*.qst) |*.qst";
             var showDialog = dialog.ShowDialog() ?? false;
             if (showDialog)
             {
                 using (Stream reader = dialog.OpenFile())
                 {
-                    object obj = deSerializer.Deserialize(reader);
-                    Question q = obj as Question;
+                    var obj = deSerializer.Deserialize(reader);
+                    var qs = (obj as QuestionSet)?.Questions;
 
-                    if (q != null)
+                    if (qs != null)
                     {
-                        CurrentQuestion = q;
+                        QuestionList = qs;
+                        _questionEnumerator = qs.GetEnumerator();
+                        CurrentQuestion = (Question)_questionEnumerator.Current;
                     }
                     else
                     {

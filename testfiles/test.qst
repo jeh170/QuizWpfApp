@@ -6,3 +6,19 @@
   <Answer>5</Answer>
   <CorrectAnswer>2</CorrectAnswer>
 </Question>
+<Question>
+  <Query>What is 5 + 2?</Query>
+  <Answer>7</Answer>
+  <Answer>0</Answer>
+  <Answer>4</Answer>
+  <Answer>5</Answer>
+  <CorrectAnswer>0</CorrectAnswer>
+</Question>
+<Question>
+  <Query>Who is the lead singer of Dorje?</Query>
+  <Answer>2</Answer>
+  <Answer>0</Answer>
+  <Answer>4</Answer>
+  <Answer>5</Answer>
+  <CorrectAnswer>2</CorrectAnswer>
+</Question>

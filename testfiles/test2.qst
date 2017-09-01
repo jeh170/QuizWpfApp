@@ -1,9 +1,21 @@
 <?xml version="1.0"?>
-<Question xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Query>2+3</Query>
-  <Answer>3</Answer>
-  <Answer>4</Answer>
-  <Answer>56</Answer>
-  <Answer>7</Answer>
-  <CorrectAnswer>1</CorrectAnswer>
-</Question>
+<QuestionSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Question>
+    <QuestionName>hsdjkfla</QuestionName>
+    <Query>hjkfsl</Query>
+    <Answer>fhsdjlaslf</Answer>
+    <Answer>dshjk</Answer>
+    <Answer>dksl</Answer>
+    <Answer>dsksksks</Answer>
+    <CorrectAnswer>0</CorrectAnswer>
+  </Question>
+  <Question>
+    <QuestionName>sjklf;</QuestionName>
+    <Query>rwetwejr</Query>
+    <Answer>jl;jkl;j</Answer>
+    <Answer>jk;</Answer>
+    <Answer>lldslsf</Answer>
+    <Answer>wlwrwl;'kwe</Answer>
+    <CorrectAnswer>0</CorrectAnswer>
+  </Question>
+</QuestionSet>
