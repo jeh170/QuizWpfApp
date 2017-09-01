@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Imbored.ViewModels
         private Question _currentQuestion;
         private IEnumerable<Question> _questionList;
         private IEnumerator _questionEnumerator;
+        private int _points;
 
         public Question CurrentQuestion
         {
@@ -54,9 +56,14 @@ namespace Imbored.ViewModels
             MessageBox.Show(b ? "Correct" : "Incorrect");
 
             if (b)
-            {
-                _questionEnumerator.MoveNext();
+                _points++;
+
+            if (_questionEnumerator.MoveNext())
                 CurrentQuestion = (Question)_questionEnumerator.Current;
+            else
+            {
+                MessageBox.Show($"Quiz Completed! You got {_points} questions right out of {QuestionList.Count()}",
+                    "Quiz Completed");
             }
         }
 
@@ -77,6 +84,7 @@ namespace Imbored.ViewModels
                     {
                         QuestionList = qs;
                         _questionEnumerator = qs.GetEnumerator();
+                        _questionEnumerator.MoveNext();
                         CurrentQuestion = (Question)_questionEnumerator.Current;
                     }
                     else
