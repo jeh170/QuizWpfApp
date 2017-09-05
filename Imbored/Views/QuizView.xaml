@@ -21,11 +21,14 @@
         </Menu>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="24" />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock TextAlignment="Center" Background="Beige" Text="{Binding CurrentQuestion.Catagory}"/>
+            <TextBlock
+                Background="Beige"
+                Text="{Binding CurrentQuestion.Catagory}"
+                TextAlignment="Center" />
             <TextBlock
                 Grid.Row="1"
                 HorizontalAlignment="Center"

@@ -42,7 +42,13 @@ namespace Imbored.ViewModels
         public QuizViewModel()
         {
             OpenFileCommand = new DelegateCommand(OpenFile);
-            SelectAnswerCommand = new DelegateCommand<int?>(SelectAnswer);//, CanSelectAnswer);
+            SelectAnswerCommand = new DelegateCommand<int?>(SelectAnswer, CanSelectAnswer);
+            PropertyChanged += QuizViewModel_PropertyChanged;
+        }
+
+        private void QuizViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            ((DelegateCommandBase)SelectAnswerCommand).RaiseCanExecuteChanged();
         }
 
         private bool CanSelectAnswer(int? arg)

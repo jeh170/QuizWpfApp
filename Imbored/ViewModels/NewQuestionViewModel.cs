@@ -27,8 +27,54 @@ namespace Imbored.ViewModels
         {
             _answers = new ObservableCollection<string>(new string[4]);
             _questionList = new ObservableCollection<Question>();
-            AddQuestionCommand = new DelegateCommand(AddQuestion);//, CanAddQuestion);
-            SaveFileCommand = new DelegateCommand(SaveFile);
+            AddQuestionCommand = new DelegateCommand(AddQuestion, CanAddQuestion);
+            SaveFileCommand = new DelegateCommand(SaveFile, CanSaveFile);
+            PropertyChanged += QuizViewModel_PropertyChanged;
+        }
+
+        public ICommand AddQuestionCommand { get; set; }
+
+        public ICommand SaveFileCommand { get; set; }
+
+        public ObservableCollection<Question> QuestionList
+        {
+            get { return _questionList; }
+            set { SetProperty(ref _questionList, value); }
+        }
+
+        public string Catagory
+        {
+            get { return _catagory; }
+            set { SetProperty(ref _catagory, value); }
+        }
+
+        public string Query
+        {
+            get { return _query; }
+            set { SetProperty(ref _query, value); }
+        }
+
+        public int CorrectAnswer
+        {
+            get { return _correctAnswer; }
+            set { SetProperty(ref _correctAnswer, value); }
+        }
+        
+        public ObservableCollection<string> Answers
+        {
+            get { return _answers; }
+            set { SetProperty(ref _answers, value); }
+        }
+
+        private bool CanSaveFile()
+        {
+            return QuestionList.Any();
+        }
+
+        private void QuizViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            ((DelegateCommandBase)AddQuestionCommand).RaiseCanExecuteChanged();
+            ((DelegateCommandBase)SaveFileCommand).RaiseCanExecuteChanged();
         }
 
         private void ResetForm()
@@ -73,40 +119,6 @@ namespace Imbored.ViewModels
 
                 QuestionList.Clear();
             }
-        }
-
-        public ICommand AddQuestionCommand { get; set; }
-
-        public ICommand SaveFileCommand { get; set; }
-
-        public ObservableCollection<Question> QuestionList
-        {
-            get { return _questionList; }
-            set { SetProperty(ref _questionList, value); }
-        }
-
-        public string Catagory
-        {
-            get { return _catagory; }
-            set { SetProperty(ref _catagory, value); }
-        }
-
-        public string Query
-        {
-            get { return _query; }
-            set { SetProperty(ref _query, value); }
-        }
-
-        public int CorrectAnswer
-        {
-            get { return _correctAnswer; }
-            set { SetProperty(ref _correctAnswer, value); }
-        }
-        
-        public ObservableCollection<string> Answers
-        {
-            get { return _answers; }
-            set { SetProperty(ref _answers, value); }
         }
     }
 }

@@ -4,22 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Imbored.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dataObjects="clr-namespace:Imbored.DataObjects"
     xmlns:local="clr-namespace:Imbored.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:dataObjects="clr-namespace:Imbored.DataObjects"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
         <c:EnumMatchToBooleanConverter x:Key="EnumMatchToBooleanConverter" />
         <c:BooleanToCorrectStringConverter x:Key="BooleanToCorrectStringConverter" />
-        <c:QuestionToCorrectAnswerConverter x:Key="QuestionToCorrectAnswerConverter"/>
-        <DataTemplate DataType="{x:Type dataObjects:Question}" x:Key="QuestionDataTemplate" >
+        <c:QuestionToCorrectAnswerConverter x:Key="QuestionToCorrectAnswerConverter" />
+        <DataTemplate x:Key="QuestionDataTemplate" DataType="{x:Type dataObjects:Question}">
             <StackPanel Orientation="Horizontal">
                 <Expander Header="{Binding Catagory}">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Query, StringFormat=Question: {0}}" />
-                        <TextBlock Text="{Binding Converter={StaticResource QuestionToCorrectAnswerConverter}, StringFormat=Answer: {0}}"/>
+                        <TextBlock Text="{Binding Converter={StaticResource QuestionToCorrectAnswerConverter}, StringFormat=Answer: {0}}" />
                     </StackPanel>
                 </Expander>
             </StackPanel>
@@ -64,7 +64,7 @@
                         <TextBox
                             Width="150"
                             Margin="5,0"
-                                 Text="{Binding Answers[0], UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding Answers[0], UpdateSourceTrigger=PropertyChanged}" />
                         <RadioButton
                             Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
                             FlowDirection="LeftToRight"
@@ -75,7 +75,7 @@
                         <TextBox
                             Width="150"
                             Margin="5,0"
-                                 Text="{Binding Answers[1], UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding Answers[1], UpdateSourceTrigger=PropertyChanged}" />
                         <RadioButton
                             Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
                             FlowDirection="LeftToRight"
@@ -86,7 +86,7 @@
                         <TextBox
                             Width="150"
                             Margin="5,0"
-                                 Text="{Binding Answers[2], UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding Answers[2], UpdateSourceTrigger=PropertyChanged}" />
                         <RadioButton
                             Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
                             FlowDirection="LeftToRight"
@@ -97,7 +97,7 @@
                         <TextBox
                             Width="150"
                             Margin="5,0"
-                                 Text="{Binding Answers[3], UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding Answers[3], UpdateSourceTrigger=PropertyChanged}" />
                         <RadioButton
                             Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToCorrectStringConverter}}"
                             FlowDirection="LeftToRight"
@@ -116,9 +116,10 @@
             Grid.Row="1"
             Grid.Column="1"
             Header="Question List">
-            <ItemsControl ItemsSource="{Binding QuestionList}" Background="White" ItemTemplate="{StaticResource QuestionDataTemplate}">
-                
-            </ItemsControl>
+            <ItemsControl
+                Background="White"
+                ItemTemplate="{StaticResource QuestionDataTemplate}"
+                ItemsSource="{Binding QuestionList}" />
         </GroupBox>
     </Grid>
 
