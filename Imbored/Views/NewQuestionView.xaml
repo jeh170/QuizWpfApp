@@ -6,12 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Imbored.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dataObjects="clr-namespace:Imbored.DataObjects"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
         <c:EnumMatchToBooleanConverter x:Key="EnumMatchToBooleanConverter" />
         <c:BooleanToCorrectStringConverter x:Key="BooleanToCorrectStringConverter" />
+        <c:QuestionToCorrectAnswerConverter x:Key="QuestionToCorrectAnswerConverter"/>
+        <DataTemplate DataType="{x:Type dataObjects:Question}" x:Key="QuestionDataTemplate" >
+            <StackPanel Orientation="Horizontal">
+                <Expander Header="{Binding Catagory}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Query, StringFormat=Question: {0}}" />
+                        <TextBlock Text="{Binding Converter={StaticResource QuestionToCorrectAnswerConverter}, StringFormat=Answer: {0}}"/>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -104,7 +116,9 @@
             Grid.Row="1"
             Grid.Column="1"
             Header="Question List">
-            <ListBox ItemsSource="{Binding QuestionList}" />
+            <ItemsControl ItemsSource="{Binding QuestionList}" Background="White" ItemTemplate="{StaticResource QuestionDataTemplate}">
+                
+            </ItemsControl>
         </GroupBox>
     </Grid>
 
